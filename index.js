@@ -6,17 +6,10 @@ const {
 
 const fs = require("fs");
 
-// =====================================================
-// CONFIG
-// =====================================================
-
 const TOKEN = process.env.DISCORD_TOKEN;
-const OWNER_ID = "1467889781756133509";
 const PREFIX = ",";
 
-// =====================================================
-// CLIENT
-// =====================================================
+const OWNER_ID = "1467889781756133509";
 
 const client = new Client({
   intents: [
@@ -26,22 +19,27 @@ const client = new Client({
   ]
 });
 
-// =====================================================
+// ==============================
 // DATABASE
-// =====================================================
+// ==============================
 
 let db = {};
 
 if (fs.existsSync("data.json")) {
   try {
-    db = JSON.parse(fs.readFileSync("data.json", "utf8"));
+    db = JSON.parse(
+      fs.readFileSync("data.json", "utf8")
+    );
   } catch {
     db = {};
   }
 }
 
 function save() {
-  fs.writeFileSync("data.json", JSON.stringify(db, null, 2));
+  fs.writeFileSync(
+    "data.json",
+    JSON.stringify(db, null, 2)
+  );
 }
 
 function getUser(id) {
@@ -82,6 +80,12 @@ function getUser(id) {
   return db[id];
 }
 
+function random(min, max) {
+  return Math.floor(
+    Math.random() * (max - min + 1)
+  ) + min;
+}
+
 function levelXP(level) {
   return level * 500;
 }
@@ -93,34 +97,11 @@ function updateLevel(user) {
   }
 }
 
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function findPlayer(name) {
-  const search = name.toLowerCase();
-
-  return players.find(
-    p => p.name.toLowerCase() === search
-  ) || players.find(
-    p => p.name.toLowerCase().includes(search)
-  );
-}
-
-function owner(message) {
-  return message.author.id === OWNER_ID;
-}
-
-// =====================================================
+// ==============================
 // PLAYERS
-// =====================================================
+// ==============================
 
 const players = [
-
-  // =========================
-  // MASTER STRIKERS
-  // =========================
-
   {
     name: "Noel Noa",
     position: "ST",
@@ -166,10 +147,6 @@ const players = [
     ability: "Brazilian Dribble"
   },
 
-  // =========================
-  // NEW GENERATION WORLD XI
-  // =========================
-
   {
     name: "Michael Kaiser",
     position: "ST",
@@ -197,10 +174,6 @@ const players = [
     ability: "Ace Eater"
   },
 
-  // =========================
-  // BLUE LOCK ELITE
-  // =========================
-
   {
     name: "Yoichi Isagi",
     position: "ST",
@@ -223,4 +196,127 @@ const players = [
     name: "Ryusei Shidou",
     position: "ST",
     class: "Striker",
-    rarity: "MY
+    rarity: "MYTHIC",
+    rating: 97,
+    ability: "Big Bang Drive"
+  },
+
+  {
+    name: "Shoei Barou",
+    position: "ST",
+    class: "Striker",
+    rarity: "LEGENDARY",
+    rating: 96,
+    ability: "Predator Eye"
+  },
+
+  {
+    name: "Seishiro Nagi",
+    position: "ST",
+    class: "Trapper",
+    rarity: "LEGENDARY",
+    rating: 96,
+    ability: "Super Trap"
+  },
+
+  {
+    name: "Meguru Bachira",
+    position: "FW",
+    class: "Dribbler",
+    rarity: "LEGENDARY",
+    rating: 95,
+    ability: "Monster"
+  },
+
+  {
+    name: "Hyoma Chigiri",
+    position: "FW",
+    class: "Speedster",
+    rarity: "LEGENDARY",
+    rating: 94,
+    ability: "44 Degree Shot"
+  },
+
+  {
+    name: "Rensuke Kunigami",
+    position: "ST",
+    class: "Power Striker",
+    rarity: "LEGENDARY",
+    rating: 94,
+    ability: "Lefty Shot"
+  },
+
+  {
+    name: "Reo Mikage",
+    position: "MF",
+    class: "Copycat",
+    rarity: "LEGENDARY",
+    rating: 94,
+    ability: "Chameleon"
+  },
+
+  {
+    name: "Charles Chevalier",
+    position: "MF",
+    class: "Playmaker",
+    rarity: "LEGENDARY",
+    rating: 94,
+    ability: "Creative Pass"
+  },
+
+  {
+    name: "Oliver Aiku",
+    position: "DF",
+    class: "Defender",
+    rarity: "EPIC",
+    rating: 93,
+    ability: "Defensive IQ"
+  },
+
+  {
+    name: "Yo Hiori",
+    position: "MF",
+    class: "Playmaker",
+    rarity: "EPIC",
+    rating: 93,
+    ability: "Threaded Pass"
+  },
+
+  {
+    name: "Gin Gagamaru",
+    position: "GK",
+    class: "Goalkeeper",
+    rarity: "EPIC",
+    rating: 92,
+    ability: "Super Save"
+  },
+
+  {
+    name: "Kenyu Yukimiya",
+    position: "FW",
+    class: "Dribbler",
+    rarity: "EPIC",
+    rating: 92,
+    ability: "Gyro Shot"
+  },
+
+  {
+    name: "Tabito Karasu",
+    position: "MF",
+    class: "Playmaker",
+    rarity: "EPIC",
+    rating: 92,
+    ability: "Ball Keeping"
+  },
+
+  {
+    name: "Eita Otoya",
+    position: "FW",
+    class: "Speedster",
+    rarity: "EPIC",
+    rating: 91,
+    ability: "Stealth"
+  },
+
+  {
+    name: "
