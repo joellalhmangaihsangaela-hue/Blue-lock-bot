@@ -1,8 +1,10 @@
-const { Client, GatewayIntentBits } = require("discord.js");
+const {
+  Client,
+  GatewayIntentBits
+} = require("discord.js");
 
 const TOKEN = process.env.DISCORD_TOKEN;
 const PREFIX = "-";
-
 const OWNER_ID = "1467889781756133509";
 
 const client = new Client({
@@ -29,19 +31,24 @@ client.on("messageCreate", async (message) => {
 
   const command = args.shift().toLowerCase();
 
+  if (command === "help") {
+    return message.reply(
+      "⚽ **BLUE LOCK BOT**\n\n" +
+      "`-help` — Show commands\n" +
+      "`-ping` — Check bot status\n" +
+      "`-owner` — Owner test"
+    );
+  }
+
   if (command === "ping") {
     return message.reply("🏓 Pong!");
   }
 
-  if (command === "help") {
-    return message.reply(
-      "⚽ **BLUE LOCK BOT**\n\n" +
-      "`-ping` — Test the bot\n" +
-      "`-help` — Show commands"
-    );
-  }
+  if (command === "owner") {
+    if (message.author.id !== OWNER_ID) {
+      return message.reply("❌ Owner only.");
+    }
 
-  if (message.author.id === OWNER_ID && command === "owner") {
     return message.reply("👑 Owner command works!");
   }
 });
